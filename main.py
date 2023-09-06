@@ -27,8 +27,13 @@ def main():
 
         if keyboard.is_pressed('q'):  # if key 'q' is pressed 
             break
-        elif keyboard.is_pressed(' '):
+        elif keyboard.is_pressed('w'):
             p.velocity += Vector2D(0,-0.04)
+        elif keyboard.is_pressed('a'):
+            p.velocity += Vector2D(-0.05,0)
+        elif keyboard.is_pressed('d'):
+            p.velocity += Vector2D(0.05,0)
+
 
     curses.endwin()
 
