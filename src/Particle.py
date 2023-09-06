@@ -1,4 +1,4 @@
-from Vector2D import Vector2D
+from src.Vector2D import Vector2D
 
 class Particle():
     def __init__(self, position, lifespan = 255, size = 1):
