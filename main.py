@@ -30,9 +30,13 @@ def main():
         elif keyboard.is_pressed('w'):
             p.velocity += Vector2D(0,-0.04)
         elif keyboard.is_pressed('a'):
-            p.velocity += Vector2D(-0.05,0)
+            p.velocity += Vector2D(-0.02,0)
         elif keyboard.is_pressed('d'):
-            p.velocity += Vector2D(0.05,0)
+            p.velocity += Vector2D(0.02,0)
+        elif keyboard.is_pressed('p'):
+            p.size += 1
+        elif keyboard.is_pressed('o'):
+            p.size -= 1
 
 
     curses.endwin()
