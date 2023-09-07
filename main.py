@@ -1,10 +1,13 @@
 from src.RenderMatrix import RenderMatrix
 from src.Particle import Particle
 from src.Vector2D import Vector2D
-from time import sleep
 
-import curses
+from time import sleep
+from math import sqrt
+
+import numpy as np
 import keyboard
+import curses
 
 def main():
     screen = curses.initscr()
@@ -13,31 +16,56 @@ def main():
     curses.cbreak()
     rows, cols = screen.getmaxyx()
     matrix = RenderMatrix(Vector2D(cols-1,rows-1),screen)
-    p = Particle(Vector2D(5,2),matrix)
-    p.velocity = Vector2D(0.5,0)
-    p.acceleration = Vector2D(0,0.02)
+
+    bars = 3
+    sizeparticles = 5
+    nparticles = 140
+    particles = []
     
+    for bar in range(bars):
+        randomvel = np.random.randint(100)/100
+        particles+=[Particle(
+            Vector2D(
+                (cols/bars)*bar,
+                np.random.randint(rows)
+            ),
+            matrix,
+            size=sizeparticles,
+            velocity = Vector2D(randomvel,10*np.random.randint(100)/100)
+        ) for _ in range(nparticles)]
+
+    #particles += [Particle(Vector2D(np.random.randint(cols/bars),np.random.randint(rows)),matrix,size=sizeparticles) for _ in range(nparticles)]
+    for p in particles:
+        p.acceleration = Vector2D(0,0.0)#+(np.random.randint(100)-100)/10000)
+
     while True:
         screen.clear()
-        p.update()
-        p.pre_render(matrix)
-        matrix.display()
-        sleep(0.01)
-        screen.refresh()
+        for p in particles:
+            p.update()
+            p.pre_render(matrix)
 
+        matrix.display()
         if keyboard.is_pressed('q'):  # if key 'q' is pressed 
             break
-        elif keyboard.is_pressed('w'):
-            p.velocity += Vector2D(0,-0.04)
-        elif keyboard.is_pressed('a'):
-            p.velocity += Vector2D(-0.02,0)
-        elif keyboard.is_pressed('d'):
-            p.velocity += Vector2D(0.02,0)
-        elif keyboard.is_pressed('p'):
-            p.size += 1
-        elif keyboard.is_pressed('o'):
-            p.size -= 1
 
+        elif keyboard.is_pressed('w'):
+            for p in particles:
+                p.velocity += Vector2D(0,-0.04)
+        elif keyboard.is_pressed('a'):
+            for p in particles:
+                p.velocity += Vector2D(-0.02,0)
+        elif keyboard.is_pressed('d'):
+            for p in particles:
+                p.velocity += Vector2D(0.02,0)
+        elif keyboard.is_pressed('p'):
+            for p in particles:
+                p.size += 1
+        elif keyboard.is_pressed('o'):
+            for p in particles:
+                p.size -= 1
+
+        screen.refresh()
+        sleep(0.02)
 
     curses.endwin()
 
