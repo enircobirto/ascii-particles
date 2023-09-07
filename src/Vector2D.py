@@ -66,5 +66,8 @@ class Vector2D:
         """Return the vector's components in polar coordinates."""
         return self.__abs__(), math.atan2(self.y, self.x)
 
+    def floor(self):
+        return Vector2D(math.floor(self.x),math.floor(self.y))
+
     def round(self):
         return Vector2D(round(self.x),round(self.y))
