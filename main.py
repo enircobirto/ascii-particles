@@ -23,7 +23,7 @@ def main():
     particles = []
     
     for bar in range(bars):
-        randomvel = np.random.randint(100)/100
+        randomvel = 0.1+np.random.randint(100)/100
         particles+=[Particle(
             Vector2D(
                 (cols/bars)*bar,
