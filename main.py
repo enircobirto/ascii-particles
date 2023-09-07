@@ -46,7 +46,7 @@ def main():
 
         matrix.display()
         if keyboard.is_pressed('q'):  # if key 'q' is pressed 
-            break
+            pass
 
         elif keyboard.is_pressed('w'):
             for p in particles:
