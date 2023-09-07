@@ -16,10 +16,12 @@ class Particle():
         if self.position.x > self.max.x-1:
             self.position.x = self.max.x-1
             self.velocity.x = self.velocity.x*-1*friction
+            self.velocity.y = self.velocity.y*friction
         
         if self.position.y > self.max.y-1:
             self.position.y = self.max.y-1
             self.velocity.y = self.velocity.y*-1*friction
+            self.velocity.x = self.velocity.x*friction
         
         if self.position.x < 0:
             self.position.x = 1
