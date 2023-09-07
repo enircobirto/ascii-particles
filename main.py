@@ -26,7 +26,7 @@ def main():
         screen.refresh()
 
         if keyboard.is_pressed('q'):  # if key 'q' is pressed 
-            break
+            pass
         elif keyboard.is_pressed('w'):
             p.velocity += Vector2D(0,-0.04)
         elif keyboard.is_pressed('a'):
