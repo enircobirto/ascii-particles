@@ -25,7 +25,7 @@ def main():
     matrix = RenderMatrix(Vector2D(300,100),screen,window)
     matrix.display()
     
-    particles = [Particle(Vector2D(rn.randint(rows),rn.randint(cols)),matrix.size, size=25) for _ in range(3)]
+    particles = [Particle(Vector2D(rn.randint(rows),rn.randint(cols)),matrix.size, size=15) for _ in range(3)]
     for p in particles:
         p.velocity = Vector2D(rn.randint(0,10)/10,rn.randint(0,10)/10)
         p.acceleration = Vector2D(0,0.002)
