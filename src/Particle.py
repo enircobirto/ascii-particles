@@ -15,20 +15,24 @@ class Particle():
         self.position += self.velocity
         friction = 0.9
         if self.position.x > self.limits[1].x-1:
+            self.velocity.x += (self.position.x-self.limits[1].x-1)/2
             self.position.x = self.limits[1].x-1
             self.velocity.x = self.velocity.x*-1*friction
             self.velocity.y = self.velocity.y*friction
         
         if self.position.y > self.limits[1].y-1:
+            self.velocity.y += (self.position.y-self.limits[1].y-1)/2
             self.position.y = self.limits[1].y-1
             self.velocity.y = self.velocity.y*-1*friction
             self.velocity.x = self.velocity.x*friction
         
         if self.position.x < limits[0].x:
+            self.velocity.x += (self.position.x/self.limits[0].x-1)/2
             self.position.x = limits[0].x
             self.velocity.x = self.velocity.x*-1*friction
         
         if self.position.y < limits[0].y:
+            self.velocity.y += (self.position.y/self.limits[0].y-1)/2
             self.position.y = limits[0].y
             self.velocity.y = self.velocity.y*-1*friction
 
