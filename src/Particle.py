@@ -13,7 +13,7 @@ class Particle():
         self.limits = limits
         self.velocity += self.acceleration
         self.position += self.velocity
-        friction = 0.5
+        friction = 0.4
 
         if self.position.x >= self.limits[1].x:
             self.velocity.x += (self.position.x-self.limits[1].x)/2

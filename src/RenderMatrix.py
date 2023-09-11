@@ -38,8 +38,7 @@ class RenderMatrix():
                     except:
                         pass
                     if cell>0:
-                        self.grid[y][x] -= 0.5
+                        self.grid[y][x] = 0
                     else:
                         self.grid[y][x] = 0
-                    if cell>255:
-                        cell = 255
+
