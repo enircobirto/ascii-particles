@@ -31,6 +31,8 @@ class RenderMatrix():
         for y,col in enumerate(self.grid):
             for x,cell in enumerate(col):
                 if cell != 0:
+                    if cell >500:
+                        cell = 500
                     try:
                         self.screen.addch(y-limitStart.y,x-limitStart.x,grayscale(cell))
                         #self.screen.addstr(x-limitStart.x,y-limitStart.y,str(Vector2D(x,y)))
@@ -38,7 +40,5 @@ class RenderMatrix():
                     except:
                         pass
                     if cell>0:
-                        self.grid[y][x] = 0
-                    else:
-                        self.grid[y][x] = 0
+                        self.grid[y][x] -= 1
 
