@@ -13,32 +13,33 @@ class Particle():
         self.limits = limits
         self.velocity += self.acceleration
         self.position += self.velocity
-        friction = 0.4
+        friction = 1-(self.size/80)
 
         if self.position.x >= self.limits[1].x:
-            self.velocity.x += (self.position.x-self.limits[1].x)/2
+            self.velocity.x += (self.position.x-self.limits[1].x)*0.25
             self.velocity.x = self.velocity.x*-1*friction
             
             self.position.x = self.limits[1].x-1
 
         if self.position.y >= self.limits[1].y:
-            self.velocity.y += (self.position.y-self.limits[1].y)/2
+            self.velocity.y += (self.position.y-self.limits[1].y)*0.25
             self.velocity.y = self.velocity.y*-1*friction
             
-            self.position.y = self.limits[1].y-1
+            self.position.y = self.limits[1].y
+            self.velocity.x = self.velocity.x*friction
 
         if self.position.x <= self.limits[0].x:
-            self.velocity.x -= (self.limits[0].x-self.position.x)/2
+            self.velocity.x -= (self.limits[0].x-self.position.x)*0.25
             self.velocity.x = self.velocity.x*-1*friction
 
             self.position.x = self.limits[0].x+1
 
         if self.position.y <= self.limits[0].y:
-            self.velocity.y -= (self.limits[0].y-self.position.y)/2
+            self.velocity.y -= (self.limits[0].y-self.position.y)*0.25
             self.velocity.y = self.velocity.y*-1*friction
 
             self.position.y = self.limits[0].y+1
 
     def pre_render(self,matrix):
-        matrix.place(self.size,self.position.floor())
+        matrix.place(self.size,self.position.round())
 
