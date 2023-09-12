@@ -2,18 +2,21 @@ from src.Vector2D import Vector2D
 from utils.grayscale import grayscale
 
 import numpy as np
+import subprocess
 import skimage
+import re
 
 from time import sleep
-import pywinctl
 from math import floor
 from subprocess import check_output
+
 class RenderMatrix():
-    def __init__(self, size, screen, window):
+    def __init__(self, size, screen, box, windowId):
         self.size = size
         self.grid = np.array([[0 for _ in range(size.x)] for _ in range(size.y)])
         self.screen = screen
-        self.window = window
+        self.box = box
+        self.windowId = windowId
 
     def place(self, particleSize, position):
         try:
@@ -22,7 +25,13 @@ class RenderMatrix():
             pass
 
     def display(self):
-        self.box = self.window.box
+
+        output = subprocess.check_output(["hyprctl","clients"]).decode(encoding="utf-8")
+        activewindow = output.split(self.windowId)[1]
+        windowSize = re.findall(r"size: (.*?)\n",activewindow)[0].split(",")
+        windowPos = re.findall(r"at: (.*?)\n",activewindow)[0].split(",")
+
+        self.box = [int(i) for i in windowPos+windowSize]
         rows, cols = self.screen.getmaxyx()
         self.max = Vector2D(cols,rows) 
         self.fontsize = Vector2D(round(self.box[2]/self.max.x),round(self.box[3]/self.max.y))

@@ -4,12 +4,12 @@ from src.Vector2D import Vector2D
 
 from time import sleep
 
+import subprocess
 import numpy.random as rn
+import re
 import numpy as np
-import pywinctl
 import keyboard
 import curses
-
 
 def main():
     screen = curses.initscr()
@@ -19,8 +19,16 @@ def main():
     curses.use_env(True)
 
     rows, cols = screen.getmaxyx()
-    window = pywinctl.getActiveWindow()
-    matrix = RenderMatrix(Vector2D(300,100),screen,window)
+
+
+    activewindow = str(subprocess.check_output(["hyprctl","activewindow"]))
+    windowId = re.findall(r"Window (.*?) ->",activewindow)[0]
+    windowSize = re.findall(r"size: (.*?)\\n",activewindow)[0].split(",")
+    windowPos = re.findall(r"at: (.*?)\\n",activewindow)[0].split(",")
+    box = [int(i) for i in windowPos + windowSize]
+    
+    matrix = RenderMatrix(Vector2D(300,100),screen,box,windowId)
+
     matrix.display()
     
     particles = [Particle(Vector2D(rn.randint(rows),rn.randint(cols)),matrix.size, size=10) for _ in range(25)]
@@ -35,6 +43,8 @@ def main():
             p.update(matrix.limits)
             p.pre_render(matrix)
         matrix.display()
+
+        
 
         sleep(0.01)
         screen.refresh()
