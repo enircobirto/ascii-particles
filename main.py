@@ -30,7 +30,7 @@ def main():
     matrix = RenderMatrix(Vector2D(300,100),screen,window)
     limits = matrix.get_limits()
     
-    particles = [Particle(Vector2D(rn.randint(cols)+limits[0].x,rn.randint(rows)+limits[0].y),matrix.size, size=rn.randint(20)+10) for _ in range(5)]
+    particles = [Particle(Vector2D(rn.randint(cols)+limits[0].x,rn.randint(rows)+limits[0].y),matrix.size, size=rn.randint(20)+10) for _ in range(4)]
     for p in particles:
         p.velocity = Vector2D(rn.randint(0,10)/10,rn.randint(0,10)/10)
         p.acceleration = Vector2D(0,0.006)

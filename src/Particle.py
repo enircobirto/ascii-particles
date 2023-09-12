@@ -22,7 +22,7 @@ class Particle():
             self.position.x = self.limits[1].x-1
 
         if self.position.y >= self.limits[1].y:
-            self.velocity.y += (self.position.y-self.limits[1].y)*0.25
+            self.velocity.y += (round(self.position.y)-self.limits[1].y)*0.25
             self.velocity.y = self.velocity.y*-1*friction
             
             self.position.y = self.limits[1].y

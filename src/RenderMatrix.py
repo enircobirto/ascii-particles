@@ -47,7 +47,7 @@ class RenderMatrix():
                     except:
                         pass
                     if cell>0:
-                        self.grid[y][x] -= 0.5+2*cell/255
+                        self.grid[y][x] -= 1
 
     def get_limits(self):
         box = self.window.box
