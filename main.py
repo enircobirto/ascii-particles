@@ -6,7 +6,6 @@ from time import sleep
 from math import sqrt
 
 import numpy as np
-import keyboard
 import curses
 
 def main():
@@ -45,24 +44,6 @@ def main():
             p.pre_render(matrix)
 
         matrix.display()
-        if keyboard.is_pressed('q'):  # if key 'q' is pressed 
-            pass
-
-        elif keyboard.is_pressed('w'):
-            for p in particles:
-                p.velocity += Vector2D(0,-0.04)
-        elif keyboard.is_pressed('a'):
-            for p in particles:
-                p.velocity += Vector2D(-0.02,0)
-        elif keyboard.is_pressed('d'):
-            for p in particles:
-                p.velocity += Vector2D(0.02,0)
-        elif keyboard.is_pressed('p'):
-            for p in particles:
-                p.size += 1
-        elif keyboard.is_pressed('o'):
-            for p in particles:
-                p.size -= 1
 
         screen.refresh()
         sleep(0.02)
