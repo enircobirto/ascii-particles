@@ -30,12 +30,18 @@ def main():
     for p in particles:
         p.velocity = Vector2D(rn.randint(0,10)/10,rn.randint(0,10)/10)
         p.acceleration = Vector2D(0,0.006)
-    
+        p.update_resized(limits)
+
     while True:
+        if not (limits[0].equals(matrix.get_limits()[0]) and limits[1].equals(matrix.get_limits()[1])):
+            limits=matrix.get_limits()
+            for p in particles:
+                p.update_resized(limits)
+
         screen.clear()
 
         for p in particles:
-            p.update(matrix.get_limits())
+            p.update()
             p.pre_render(matrix)
 
         matrix.display()

@@ -71,3 +71,9 @@ class Vector2D:
 
     def round(self):
         return Vector2D(round(self.x),round(self.y))
+
+    def equals(self,other):
+        if self.distance_to(other) == 0:
+            return True
+        else:
+            return False
