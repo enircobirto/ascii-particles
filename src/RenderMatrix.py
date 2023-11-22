@@ -26,14 +26,14 @@ class RenderMatrix():
     def particle_head(self,particleSize,position):
         try:
             limits = self.get_limits()
-            self.screen.addstr(position.y-limits[0].y-1,position.x-limits[0].x,grayscale(round(particleSize*255/30)),curses.A_BOLD)
+            self.screen.addstr(position.y-limits[0].y-1,position.x-limits[0].x,grayscale(particleSize),curses.A_BOLD)
         except:
             pass
 
     def display(self):
-        c = 700
-        curses.init_color(1, c,c,c)
-        curses.init_pair(1, 1,-1)
+        c = 450
+        curses.init_color(curses.COLOR_GREEN, c,c,c)
+        curses.init_pair(1, curses.COLOR_GREEN,-1)
         limits = self.get_limits()
         for y,col in enumerate(self.grid):
             for x,cell in enumerate(col):

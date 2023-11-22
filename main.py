@@ -26,10 +26,14 @@ def main():
     matrix = RenderMatrix(Vector2D(300,100),screen,window)
     limits = matrix.get_limits()
     
-    particles = [Particle(Vector2D(rn.randint(cols)+limits[0].x,rn.randint(rows)+limits[0].y),matrix.size, size=rn.randint(20)+10) for _ in range(4)]
+    particles = [Particle(Vector2D(rn.randint(cols)+limits[0].x,rn.randint(rows)+limits[0].y),matrix.size, size=rn.randint(90)+10) for _ in range(15)]
+    #particles = [Particle(Vector2D(i+limits[0].x+5,limits[0].y),matrix.size, size=1+i) for i in range(cols-10)]
+
     for p in particles:
         p.velocity = Vector2D(rn.randint(0,10)/10,rn.randint(0,10)/10)
-        p.acceleration = Vector2D(0,0.006)
+        #p.velocity = Vector2D(rn.randint(0,10)/10,rn.randint(0,10)/10)
+        p.acceleration = Vector2D(0,0.01)
+        #p.acceleration = Vector2D(-0.0001,0.00001+(p.size/1000000))
         p.update_resized(limits)
 
     while True:
@@ -48,7 +52,7 @@ def main():
 
         for p in particles:
             matrix.particle_head(p.size,p.position.round())
-        sleep(0.01)
+        sleep(0.02)
         screen.refresh()
 
     curses.endwin()

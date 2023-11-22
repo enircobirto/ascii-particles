@@ -44,21 +44,21 @@ class Particle():
         self.limits = limits
         self.velocity += self.acceleration
         self.position += self.velocity
-        minFriction=0.9
-        friction = minFriction+(1-minFriction)*math.sqrt(self.size/10)/self.size/10
+        multiplier=0.5
 
         if self.position.x > self.limits[1].x-1:
-            self.velocity.x += (self.position.x-self.limits[1].x)*0.25
+            self.velocity.x += (self.position.x-self.limits[1].x)*multiplier
             
         if self.position.y > self.limits[1].y:
-            self.velocity.y += (self.position.y-self.limits[1].y)*0.25
+            self.velocity.y += (self.position.y-self.limits[1].y)*multiplier
 
         if self.position.x < self.limits[0].x+1:
-            self.velocity.x -= (self.limits[0].x-self.position.x)*0.25
+            self.velocity.x -= (self.limits[0].x-self.position.x)*multiplier
 
         if self.position.y < self.limits[0].y+1:
-            self.velocity.y -= (self.limits[0].y-self.position.y)*0.25
+            self.velocity.y -= (self.limits[0].y-self.position.y)*multiplier
 
     def pre_render(self,matrix):
-        matrix.place(self.size,self.position.round())
+        matrix.place(5+(abs(self.velocity.x)+abs(self.velocity.y)),self.position.round())
+        #matrix.place(self.size,self.position.round())
 
